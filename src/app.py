@@ -3,8 +3,7 @@ import yfinance as yf
 msft = yf.Ticker("MSFT")
 
 # get stock info
-for key in msft.info.keys():
-    print(msft[key].values)
+print(msft.info.keys())
 
 # get historical market data
 hist = msft.history(period="max")
