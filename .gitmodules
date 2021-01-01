@@ -1,0 +1,6 @@
+[submodule "src/autoscraper"]
+	path = src/autoscraper
+	url = https://github.com/vxlk/autoscraper.git
+[submodule "src/yfinance"]
+	path = src/yfinance
+	url = https://github.com/vxlk/yfinance.git

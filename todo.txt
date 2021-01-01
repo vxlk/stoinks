@@ -1,0 +1,15 @@
+Setup:
+https://github.com/vxlk/autoscraper
+git pull
+git submodule update --init --recursive
+go to src/autoscraper
+py setup.py install
+
+--todo--
+Put parameters to json
+Fill out multiple pages (history, statistics, etc)
+Figure out parameters to train
+Abstract trainer into module
+Create database
+
+https://www.investopedia.com/articles/active-trading/101014/basics-algorithmic-trading-concepts-and-examples.asp
