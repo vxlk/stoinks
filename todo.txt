@@ -4,12 +4,14 @@ git pull
 git submodule update --init --recursive
 go to src/autoscraper
 py setup.py install
+go to src/yfinance
+py setup.py install
+pip install pyqt
+pip install pyqtconsole
 
 --todo--
 Put parameters to json
-Fill out multiple pages (history, statistics, etc)
-Figure out parameters to train
-Abstract trainer into module
+create a timed event service
 Create database
 
 https://www.investopedia.com/articles/active-trading/101014/basics-algorithmic-trading-concepts-and-examples.asp
