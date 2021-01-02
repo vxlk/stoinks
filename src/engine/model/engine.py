@@ -6,4 +6,4 @@ from PyQt5.QtCore import *
 # will take functions for the app to execute
 class Engine(QObject):
     __init__(self):
-    eventQueue = []
+        eventQueue = []
