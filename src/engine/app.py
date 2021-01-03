@@ -9,10 +9,10 @@ from pyqtconsole.console import PythonConsole
 
 from view.console import Console
 from util.logger import *
+from model.engine import *
 
 # clear logs
 logger.ClearLogs()
-logger.Log("test")
 
 # make Qapp
 app = QApplication([])
@@ -44,6 +44,9 @@ window.addDockWidget(Qt.TopDockWidgetArea, guiContainer)
 #console.show() add dock widget calls show on its widget i think
 console.eval_in_thread() # let the input terminal go
 
+# make an engine
+engine.connectConsole(console)
+
 # Force the style to be the same on all OSs:
 app.setStyle("Fusion")
 
@@ -54,6 +57,7 @@ palette.setColor(QPalette.WindowText, Qt.white)
 
 app.setPalette(palette)
 
+window.setMinimumSize(820, 600)
 window.show()
 app.exec_()
 # sys.exit(app.exec_())

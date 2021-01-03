@@ -7,11 +7,13 @@ import threading
 # a simple debugging console for now, eventually i wanna do some kind of intellisense
 # or something more useful, for now this will prove invaulable for debugging speeds
 
-class Console(QPlainTextEdit):
+class Console(QLabel):
     def __init__(self):
         super().__init__()
         self.text = ""
         self.printQueue = []
+        
+        self.setStyleSheet("QLabel { background-color : black; color : green; }")
 
         #one thread will be adding to the print queue, 
         #and another will be iterating through it.
@@ -30,7 +32,9 @@ class Console(QPlainTextEdit):
                 self.text += msg
             self.printQueue = []
             log_file.close()
-            self.setPlainText(self.text)
+            # todo: not running on gui thread and Qt is FURIOUS ...
+            self.moveToThread(QThread.currentThread())
+            self.setText(self.text)
 
     #print msg to the console
     def show(self, msg, sep="\n"):
