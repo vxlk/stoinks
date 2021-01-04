@@ -4,6 +4,9 @@ from PyQt5.QtGui import *
 import threading
 
 from util.logger import *
+from view.console import *
+from model.timed_event import TimedEvent
+from model.portfolio import *
 
 # The driver for the whole project ... this will generate
 # premade script text for the input console with all the
@@ -14,7 +17,13 @@ class Engine(QObject):
         super().__init__()
         self.event_queue = {} # this dont work yet, my python is too bad
         self.console = None
-        threading.Timer(1.0, self.on_idle).start()
+        self.debug_console = None
+        self.portfolio = Portfolio()
+
+        #my design decision here is to decouple gui elements, but couple the finance element
+        self.finance_scrape_event = TimedEvent("Scrape Yahoo", 5.0, self.portfolio.update)
+        self.code_runner = TimedEvent("Run Python", 1.0, self.on_idle)
+        self.debug_console_update = None # can be added later if the user wants this
 
         self.init_strings = {"from model.engine import *"}
 
@@ -27,15 +36,19 @@ class Engine(QObject):
             # self.add(cmd)
             self.add_event(self.add, [cmd])
 
+    def connectDebugConsole(self, console):
+        self.debug_console = console
+        if self.debug_console == None:
+            raise Exception("Engine does not have access to the debug console")
+        self.debug_console_update = TimedEvent("Update Debug Console", 1.0, self.debug_console.on_idle)
+
     def on_idle(self):
         for event in self.event_queue:
-            logger.Log("Running function: " + event.__name__)
             event(*self.event_queue[event])
         self.event_queue = []
 
     def add(self, str_cmd):
         self.console.insert_input_text(str_cmd)
-        logger.Log("Running code: " + str(str_cmd))
         self.console._run_source(str_cmd)
         enterEvent = QKeyEvent(QEvent.KeyPress, Qt.Key_Return, Qt.NoModifier)
         #QCoreApplication.postEvent(self.console, enterEvent)
@@ -46,5 +59,10 @@ class Engine(QObject):
         if func in self.event_queue:
             on_idle() # clear the queue    
         self.event_queue[func] = args
+
+    def stop(self):
+        self.finance_scrape_event.stop()
+        self.code_runner.stop()
+        self.debug_console_update.stop()
 
 engine = Engine()

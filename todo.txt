@@ -13,5 +13,6 @@ pip install pyqtconsole
 Put parameters to json
 create a timed event service
 Create database
+deal with race conditions
 
 https://www.investopedia.com/articles/active-trading/101014/basics-algorithmic-trading-concepts-and-examples.asp

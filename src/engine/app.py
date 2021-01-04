@@ -22,6 +22,12 @@ window = QMainWindow()
 
 console = PythonConsole()
 logConsole = Console()
+# stop debug console from resizing
+logConsoleFrame = QScrollArea()
+logConsoleFrame.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+logConsoleFrame.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+logConsoleFrame.setWidgetResizable(True)
+logConsoleFrame.setWidget(logConsole)
 #temp for now
 gui = QWidget()
 
@@ -31,7 +37,7 @@ consoleContainer.setWidget(console)
 
 logConsoleContainer = QDockWidget("Output")
 logConsoleContainer.setAllowedAreas(Qt.RightDockWidgetArea)
-logConsoleContainer.setWidget(logConsole)
+logConsoleContainer.setWidget(logConsoleFrame)
 
 guiContainer = QDockWidget("GUI View")
 guiContainer.setAllowedAreas(Qt.TopDockWidgetArea)
@@ -46,6 +52,7 @@ console.eval_in_thread() # let the input terminal go
 
 # make an engine
 engine.connectConsole(console)
+engine.connectDebugConsole(logConsole)
 
 # Force the style to be the same on all OSs:
 app.setStyle("Fusion")
@@ -61,3 +68,5 @@ window.setMinimumSize(820, 600)
 window.show()
 app.exec_()
 # sys.exit(app.exec_())
+
+engine.stop()
