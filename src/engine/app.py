@@ -8,6 +8,7 @@ from PyQt5.QtCore import *
 from pyqtconsole.console import PythonConsole
 
 from view.console import Console
+from view.gui_dock import *
 from util.logger import *
 from model.engine import *
 
@@ -29,7 +30,7 @@ logConsoleFrame.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
 logConsoleFrame.setWidgetResizable(True)
 logConsoleFrame.setWidget(logConsole)
 #temp for now
-gui = QWidget()
+gui = finance_tab_container()
 
 consoleContainer = QDockWidget("Input")
 consoleContainer.setAllowedAreas(Qt.LeftDockWidgetArea) 
