@@ -12,7 +12,7 @@ class TimedEvent():
         self.kwargs     = kwargs
         self.is_running = False
         self.start()
-        self.debug_log_functions = {"Scrape Yahoo"}
+        self.debug_log_functions = {}
 
     def _run(self):
         self.is_running = False

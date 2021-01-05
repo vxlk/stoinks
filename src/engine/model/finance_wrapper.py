@@ -93,6 +93,7 @@ class yfinance_module():
             self.create_data(str_stock_abbreviation)
 
     def create_data(self, str_stock_abbreviation):
+        logger.Log("Scraping stock data for: " + str_stock_abbreviation)
         self.yfinance_ticker_data[str_stock_abbreviation] = yfinance_data(self.yfinance_tickers[str_stock_abbreviation])
 
     def update_data(self):

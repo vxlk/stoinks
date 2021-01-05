@@ -21,7 +21,7 @@ class Engine(QObject):
         self.portfolio = Portfolio()
 
         #my design decision here is to decouple gui elements, but couple the finance element
-        self.finance_scrape_event = TimedEvent("Scrape Yahoo", 5.0, self.portfolio.update)
+        self.finance_scrape_event = TimedEvent("Scrape Yahoo", 30.0, self.portfolio.update)
         self.code_runner = TimedEvent("Run Python", 1.0, self.on_idle)
         self.debug_console_update = None # can be added later if the user wants this
 
