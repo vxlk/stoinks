@@ -6,7 +6,7 @@ class Portfolio():
     def __init__(self):
         self.stock_name_list = []
         self.stock_name_list.append("TSLA")
-        self.stock_name_list.append("AAPL")
+        #self.stock_name_list.append("AAPL")
         self.yfinance_wrapper = yfinance_module(self.stock_name_list)
 
     def update(self):

@@ -101,9 +101,9 @@ class yfinance_module():
             self.create_data(stock_name)
 
     def info(self, str_stock_abbreviation):
-        return self.yfinance_data[str_stock_abbreviation].info
+        return self.yfinance_ticker_data[str_stock_abbreviation].info
 
     def history(self, str_stock_abbreviation):
-        hist = self.yfinance_data[str_stock_abbreviation].history
+        hist = self.yfinance_ticker_data[str_stock_abbreviation].history
         # eventually format here
-        return hist
+        return hist # todo: investigate how to extract stuff out of this idiot
