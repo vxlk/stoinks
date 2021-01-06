@@ -7,6 +7,7 @@ msft.info
 
 # get historical market data
 hist = msft.history(period="max")
+print(type(hist))
 
 # show actions (dividends, splits)
 msft.actions
