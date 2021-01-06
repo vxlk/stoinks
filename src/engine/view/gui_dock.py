@@ -31,20 +31,20 @@ class finance_graph_widget(QWidget):
         self.graph_widget.showGrid(x=True, y=True)
 
         # todo: support different views
-        x_axis_high = self._history['High']
-        x_axis_low = self._history['Low']
+        x_axis_high = []
+        x_axis_low = []
 
-        y_axis_high = []
-        y_axis_low = []
+        y_axis_high = self._history['High']
+        y_axis_low = self._history['Low']
 
         counter_high = 1
-        for date in x_axis_high:
+        for date in y_axis_high:
             counter_high +=1
-            y_axis_high.append(counter_high)
+            x_axis_high.append(counter_high)
         counter_low = 1
-        for date in x_axis_low:
+        for date in y_axis_low:
             counter_low +=1
-            y_axis_low.append(counter_low)
+            x_axis_low.append(counter_low)
 
         self.plot(x_axis_high, y_axis_high, 'High', 'r')
         self.plot(x_axis_low, y_axis_low, 'Low', 'b')
