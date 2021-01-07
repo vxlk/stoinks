@@ -4,9 +4,14 @@ from util.logger import *
 class yfinance_data():
     def __init__(self, ticker = None):
 
+        self.hist_periods = ['1d', '5d', '1mo', '3mo', '6mo', 'ytd', '1y', '2y', '5y', '10y']
+        self.hist_intervals = ['1m', '2m', '5m', '15m', '30m', '60m', '90m', '1h', '1d', '5d', '1wk', '1mo', '3mo']
         # -- begin data -- #
         self.info = None
+
         self.history = None
+        self.today = None
+
         self.actions = None
         self.dividends = None
         self.splits = None
@@ -35,6 +40,7 @@ class yfinance_data():
         self.info = ticker.info
         # get historical market data
         self.history = ticker.history(period="max")
+        self.today = ticker.history(period="1d", interval="5m")
         # show actions (dividends, splits)
         self.actions = ticker.actions
         # show dividends
@@ -75,9 +81,12 @@ class yfinance_data():
             self.options_chain.append(ticker.option_chain(option))
             # data available via: opt.calls, opt.puts
 
-        def history(self, date_string):
-            # todo
-            return None
+    def history(self, date_string):
+        # todo
+        return None
+
+    def price(self):
+        return self.info['regularMarketPrice']
 
 # a wrapper around the yahoo finance module
 class yfinance_module():
@@ -106,4 +115,10 @@ class yfinance_module():
     def history(self, str_stock_abbreviation):
         hist = self.yfinance_ticker_data[str_stock_abbreviation].history
         # eventually format here
-        return hist # todo: investigate how to extract stuff out of this idiot
+        return hist
+    def today(self, str_stock_abbreviation):
+        hist = self.yfinance_ticker_data[str_stock_abbreviation].today
+        return hist
+
+    def price(self, str_stock_abbreviation):
+        return self.yfinance_ticker_data[str_stock_abbreviation].price()

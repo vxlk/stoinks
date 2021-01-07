@@ -11,7 +11,7 @@ pip install pyqtconsole
 pip install pyqtgraph
 
 --todo--
-create tabbed widget within tab widget for each stock
+make a "details" gridlayout in today
 make on_click for graphs for zoomed/detailed view
 Put parameters to json
 Create database

@@ -3,11 +3,10 @@ import yfinance as yf
 msft = yf.Ticker("MSFT")
 
 # get stock info
-msft.info
+print(msft.info)
 
 # get historical market data
 hist = msft.history(period="max")
-print(type(hist))
 
 # show actions (dividends, splits)
 msft.actions
