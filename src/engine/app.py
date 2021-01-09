@@ -65,7 +65,7 @@ palette.setColor(QPalette.WindowText, Qt.white)
 
 app.setPalette(palette)
 
-window.setMinimumSize(820, 600)
+window.setMinimumSize(820, 800)
 window.show()
 app.exec_()
 # sys.exit(app.exec_())

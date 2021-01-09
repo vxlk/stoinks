@@ -12,9 +12,6 @@ class finance_graph_widget_day(QWidget):
         self.graph_widget.show()
 
         self._history = engine.portfolio.yfinance_wrapper.today(str_stock_name)
-        print(self._history)
-        print(type(self._history))
-        print(self._history.columns)
 
         # settings
         #Add Background colour to white
@@ -103,14 +100,16 @@ class finance_tab_widget(QTabWidget):
     def __init__(self, str_stock_name):
         super().__init__()
         # today
-        self.grid_day = QGridLayout(self)
+        self.grid_day = QVBoxLayout(self)
         self.graph_day = finance_graph_widget_day(self, str_stock_name)
         self.grid_day.addWidget(self.graph_day)
 
         # todo add this as part of a data layout class!
         self.price_label = QLabel()
         self.price_label.setText(str(engine.portfolio.yfinance_wrapper.price(str_stock_name)))
-        self.price_label.setStyleSheet("QLabel { background-color : red; color : blue; }")
+        font = QFont("Ariel", 34, QFont.Bold)
+        self.price_label.setFont(font)
+        self.price_label.setStyleSheet("QLabel { background-color : white; color : blue; }")
         self.price_label.setSizePolicy(QSizePolicy.Minimum,
                                        QSizePolicy.Minimum)
         self.grid_day.addWidget(self.price_label)

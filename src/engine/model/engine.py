@@ -7,6 +7,7 @@ from util.logger import *
 from view.console import *
 from model.timed_event import TimedEvent
 from model.portfolio import *
+from algo.algo import *
 
 # The driver for the whole project ... this will generate
 # premade script text for the input console with all the
@@ -20,9 +21,17 @@ class Engine(QObject):
         self.debug_console = None
         self.portfolio = Portfolio()
 
+        # Make an algorithm container
+        _history = self.portfolio.yfinance_wrapper.today("TSLA")
+        data = _history['High']
+        self.algo_container = AlgorithmContainer()
+        self.algo_container.Calculate("Highs Today TSLA", data)
+
         #my design decision here is to decouple gui elements, but couple the finance element
         self.finance_scrape_event = TimedEvent("Scrape Yahoo", 30.0, self.portfolio.update)
         self.code_runner = TimedEvent("Run Python", 1.0, self.on_idle)
+
+
         self.debug_console_update = None # can be added later if the user wants this
 
         self.init_strings = {"from model.engine import *"}

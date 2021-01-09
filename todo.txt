@@ -9,6 +9,7 @@ py setup.py install
 pip install pyqt
 pip install pyqtconsole
 pip install pyqtgraph
+pip install statsmodels
 
 --todo--
 make a "details" gridlayout in today
